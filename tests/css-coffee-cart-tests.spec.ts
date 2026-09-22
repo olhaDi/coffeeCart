@@ -36,7 +36,6 @@ test('Discounted Mocha is added after accepting the promo offer', async ({ page 
     await page.locator('[data-test="Espresso"]').click();
     await page.locator('[data-test="Espresso_Macchiato"]').click();
     await page.locator('[data-test="Cappuccino"]').click();
-    await page.getByText('It\'s your lucky day! Get an').click();
     await expect(
         page.locator('span:has-text("It\'s your lucky day! Get an extra cup of Mocha for $4.")')
     ).toBeVisible();

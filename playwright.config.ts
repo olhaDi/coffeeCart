@@ -35,13 +35,10 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'coffee-cart',
+      name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    {
-      name: 'aria',
-      use: { ...devices['Desktop Chrome'] },
-    }
+
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
