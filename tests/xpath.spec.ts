@@ -7,10 +7,10 @@ test('The sum of selected checkboxes is valid', async ({ page }) => {
     for (let i = 0; i < 4; i++) {
         await checkboxes.nth(i).isVisible();
         await checkboxes.nth(i).check();
+        await expect(
+            page.locator('//span[@data-testid="interactions-selected-count"]')
+        ).toHaveText(`Вибрано: ${i + 1}`);
     }
-    await expect(
-        page.locator('//span[@data-testid="interactions-selected-count"]')
-    ).toHaveText('Вибрано: 4');
     await page.locator('//input[@data-testid="interactions-row-select-4"]').uncheck();
     await expect(
         page.locator('//span[@data-testid="interactions-selected-count"]')
@@ -25,13 +25,18 @@ test('Sorting check', async ({ page }) => {
         'Пошук за тегом',
         'Створення статті'
     ];
-    const sortedOrder = [
+    const sortedOrderFailedFirst = [
         'Створення статті',
         'Авторизація',
         'Пошук за тегом',
         'Завантаження файлу'
     ];
-
+    const sortedOrderSkippedFirst = [
+        'Завантаження файлу',
+        'Авторизація',
+        'Пошук за тегом',
+        'Створення статті'
+    ];
     for (let i = 0; i < defaultOrder.length; i++) {
         await expect(
             page.locator(
@@ -40,12 +45,20 @@ test('Sorting check', async ({ page }) => {
         ).toHaveText(defaultOrder[i]);
     }
     await page.locator("//button[text()='Статус']").click();
-    for (let i = 0; i < defaultOrder.length; i++) {
+    for (let i = 0; i < sortedOrderFailedFirst.length; i++) {
         await expect(
             page.locator(
                 `(//input[@type='checkbox'][1]/../following-sibling::td[1])[${i + 1}]`
             )
-        ).toHaveText(sortedOrder[i]);
+        ).toHaveText(sortedOrderFailedFirst[i]);
+    }
+    await page.locator("//button[text()='Статус']").click();
+    for (let i = 0; i < sortedOrderFailedFirst.length; i++) {
+        await expect(
+            page.locator(
+                `(//input[@type='checkbox'][1]/../following-sibling::td[1])[${i + 1}]`
+            )
+        ).toHaveText(sortedOrderSkippedFirst[i]);
     }
 });
 
