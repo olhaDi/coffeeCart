@@ -4,7 +4,7 @@ import { getVotingMessage } from '../../calculate-age-functions';
 for (const age of ['1', '10', '17']) {
   test(`User aged ${age} is not old enough to vote`, async () => {
     const message = getVotingMessage(age);
-    expect(message).toBe('Ви не можете голосувати');
+    expect(message).toBe('Ви ще не можете голосувати');
   });
 }
 
