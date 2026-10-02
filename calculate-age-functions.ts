@@ -1,7 +1,7 @@
 export function getVotingMessage(enteredAge: string) {
   const age = checkCorrectnessOfEnteredAge(enteredAge);
   if (age < 18) {
-    return 'Ви не можете голосувати';
+    return 'Ви ще не можете голосувати';
   }
   return 'Ви можете голосувати.';
 }
