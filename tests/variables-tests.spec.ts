@@ -6,6 +6,7 @@ const espressoPrice = "$10.00";
 
 test.beforeEach(async ({ page }) => {
     await page.goto(baseUrl);
+    var espressoLocator = page.locator(`[data-test="${espressoProduct}"]`);
 });
 
 test('Product is visible on Cart tab', async ({ page }) => {
@@ -82,4 +83,18 @@ test('Should remove one Espresso from cart', async ({ page }) => {
     await expect(espressoItemInCartLocator).toBeVisible();
     await removeOneEspressoButtonLocator.click();
     await expect(noCoffeeInCartLocator).toBeVisible();
+});
+
+test('test', async ({ page }) => {
+    function outer() {
+        let result = 22;
+        function inner() {
+            let result = 33;
+            return result;
+        }
+        console.log(inner());
+        console.log(result);
+    }
+
+    outer();
 });
