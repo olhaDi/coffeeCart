@@ -56,5 +56,5 @@ export async function FillPaymentDetails(
 }
 
 export async function SubmitPaymentDetails(page: Page) {
-  page.getByRole('button', { name: 'Submit' }).click();
+  await page.getByRole('button', { name: 'Submit' }).click();
 }
